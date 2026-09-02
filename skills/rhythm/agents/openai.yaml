@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目行为节律管理"
+  short_description: "创建和维护项目行为节律定义"
+  default_prompt: "使用 $rhythm 为当前项目建立或更新行为节律定义。"
