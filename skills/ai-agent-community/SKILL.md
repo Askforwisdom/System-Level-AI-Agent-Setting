@@ -1,17 +1,25 @@
 ---
-name: register-project
-description: 将一个新 Agent 规范化地注册到系统用户级 Agent 注册登记表（`C:/Users/Administrator/.agents/AGENTS.md`）。当用户要求"注册 Agent 到注册登记表""把某 Agent 加入系统用户级 Agent 注册登记表"或新增对外可被其他会话调用的 Agent 能力时使用；当发现某 Agent 存在向外提供的服务或能力但尚未登记时，也应按本 skill 规范完成注册。本 skill 是注册登记表的唯一写入入口，仅可在工作目录为用户 .agents 目录的会话中执行。
+name: ai-agent-community
+description: AI Agent Community（系统用户级 Agent 注册登记表）的查看、注册登记与注册登记规范。当需要查看注册登记表（本机已注册哪些 Agent、各 Agent 的职责与对外能力）、将新 Agent 注册到注册登记表、更新既有注册条目，或确认注册登记的规范与权限边界时使用。注册登记表的内容包含在 `C:/Users/Administrator/.agents/AGENTS.md` 中，本 skill 是其中注册登记表内容的唯一写入入口，仅可在工作目录为用户 .agents 目录的会话中执行写入。
 ---
 
-# Register Project
+# AI Agent Community
 
-将 Agent 注册到系统用户级 Agent 注册登记表。
+系统用户级 Agent 注册登记表是本机 AI Agent 社区的成员名录：登记当前系统用户环境下可跨项目调用的 Agent 及其能力。注册登记表的内容包含在 `C:/Users/Administrator/.agents/AGENTS.md` 中，随每个会话启动注入上下文。本 skill 规范该登记表的**查看**、**注册登记**与**注册登记规范**。
 
-## 权限边界（必须先确认）
+## 查看注册登记表
 
-- 本 skill 只对**工作目录为 `C:/Users/Administrator/.agents` 的会话**生效。只有该会话有权修改注册登记表文件。
+需要了解本机已注册哪些 Agent、某 Agent 的工作目录/职责/对外能力/约束时：
+
+1. 直接 Read `C:/Users/Administrator/.agents/AGENTS.md` 的"注册 Agent"小节（任何会话都可读）。
+2. 按条目中的 skill 名称判断应调用哪个 Agent 的哪项能力；使用时遵循"使用约定"（通过 subagent 派发并做会话级引导）。
+
+## 注册登记规范（必须先确认）
+
+- 本 skill 的写入动作只对**工作目录为 `C:/Users/Administrator/.agents` 的会话**生效。只有该会话有权修改注册登记表文件。
 - 其他 Agent 的会话（工作目录为其他项目的 Agent）**不得直接注册**，也不得被要求代为注册。若注册请求来自其他 Agent 的会话，应拒绝写入，并引导用户在 .agents 目录会话中发起注册。
 - 执行注册前确认：当前工作目录确为 `C:/Users/Administrator/.agents`。否则立即停止并说明边界。
+- 注册动作**只追加/更新"注册 Agent"小节下的条目**，"使用约定"（subagent 派发与引导模板）及其他 Agent 的既有条目保持原样（除非本次任务就是更新它）。
 
 ## 注册前检查
 
@@ -41,13 +49,6 @@ description: 将一个新 Agent 规范化地注册到系统用户级 Agent 注�
 - 工作目录用绝对路径、正斜杠，与既有条目风格一致。
 - 对外能力逐条列出 skill 名称；没有 skill 承载的能力也可写成纯描述（如"查询 XX 数据源"），但须说明调用方式。
 - 约束条目是固定句式，指向该 Agent 工作目录下自身 `AGENTS.md`，不在注册登记表中复制其内部规则细节。
-
-## 不修改的部分
-
-注册动作**只追加/更新"注册 Agent"小节下的条目**，以下内容保持原样：
-
-- "使用约定"（subagent 派发与引导模板）。
-- 其他 Agent 的既有条目（除非本次任务就是更新它）。
 
 ## 验证
 
