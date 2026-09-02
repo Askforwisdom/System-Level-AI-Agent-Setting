@@ -1,11 +1,11 @@
 ---
 name: behavior-log
-description: 项目行为日志（Behavior Log）的记录规范。所有 Agent 在有任何行为或动作时，必须按本 skill 将简略行为信息记录到项目 `.agents/behavior/log/YYYY-MM.md` 月度行为日志：行为完成、暂停或失败后向当月日志追加记录，产出内容在备注中体现；日志成功写入后方可报告任务完成。用户要求记录行为日志、补录历史行为、更正日志或检查日志完整性时使用。
+description: Agent 行为日志（Behavior Log）的记录规范。所有 Agent 在有任何行为或动作时，必须按本 skill 将简略行为信息记录到项目 `.agents/behavior/log/YYYY-MM.md` 月度行为日志：行为完成、暂停或失败后向当月日志追加记录，产出内容在备注中体现；日志成功写入后方可报告任务完成。用户要求记录行为日志、补录历史行为、更正日志或检查日志完整性时使用。
 ---
 
-# Behavior Log（项目行为日志）
+# Behavior Log（Agent 行为日志）
 
-将 Agent 的所有行为记录到项目月度行为日志。项目只有这一种行为日志。
+将 Agent 的所有行为记录到项目下的月度行为日志。
 
 ## 核心原则
 
@@ -28,7 +28,7 @@ description: 项目行为日志（Behavior Log）的记录规范。所有 Agent 
 使用以下结构创建 `.agents/behavior/log/YYYY-MM.md`：
 
 ```markdown
-# YYYY 年 MM 月项目行为日志
+# YYYY 年 MM 月 Agent 行为日志
 
 | 发生时间 | Agent 行为 | 执行结果 | 备注 |
 |---|---|---|---|

@@ -1,6 +1,6 @@
 ---
 name: ai-agent-community
-description: AI Agent Community（系统用户级 Agent 注册登记表）的查看、注册登记与注册登记规范。当需要查看注册登记表（本机已注册哪些 Agent、各 Agent 的职责与对外能力）、将新 Agent 注册到注册登记表、更新既有注册条目，或确认注册登记的规范与权限边界时使用。注册登记表的内容包含在 `C:/Users/Administrator/.agents/AGENTS.md` 中，本 skill 是其中注册登记表内容的唯一写入入口，仅可在工作目录为用户 .agents 目录的会话中执行写入。
+description: AI Agent Community（系统用户级 Agent 注册登记表）的查看、注册登记与注册登记规范。当需要查看注册登记表（本机已注册哪些 Agent、各 Agent 的职责与对外能力）、将新 Agent 注册到注册登记表、更新既有注册条目，或确认注册登记的规范与权限边界时使用。注册登记表的内容包含在 `C:/Users/Administrator/.agents/AGENTS.md` 中，写入建议统一经由本 skill 进行，一般由工作目录为用户 .agents 目录的会话执行。
 ---
 
 # AI Agent Community
@@ -16,15 +16,13 @@ description: AI Agent Community（系统用户级 Agent 注册登记表）的查
 
 ## 注册登记规范（必须先确认）
 
-- 本 skill 的写入动作只对**工作目录为 `C:/Users/Administrator/.agents` 的会话**生效。只有该会话有权修改注册登记表文件。
-- 其他 Agent 的会话（工作目录为其他项目的 Agent）**不得直接注册**，也不得被要求代为注册。若注册请求来自其他 Agent 的会话，应拒绝写入，并引导用户在 .agents 目录会话中发起注册。
 - 执行注册前确认：当前工作目录确为 `C:/Users/Administrator/.agents`。否则立即停止并说明边界。
 - 注册动作**只追加/更新"注册 Agent"小节下的条目**，"使用约定"（subagent 派发与引导模板）及其他 Agent 的既有条目保持原样（除非本次任务就是更新它）。
 
 ## 注册前检查
 
 1. 确认待注册 Agent 的工作目录真实存在（如 `D:/xxx/project`）。
-2. 确认该工作目录根存在自己的 `AGENTS.md`。注册登记表只登记指针，Agent 的使用权限与操作约定以其自身 `AGENTS.md` 为唯一判据；若缺失，先提示用户补齐，或取得用户明确同意后按简化条目注册（条目中说明约束待补充）。
+2. 确认该工作目录根存在自己的 `AGENTS.md`。注册登记表只登记指针，Agent 的使用权限与操作约定以其自身 `AGENTS.md` 为准；若缺失，先提示用户补齐，或取得用户明确同意后按简化条目注册（条目中说明约束待补充）。
 3. 枚举该工作目录 `.agents/skills/`（或其对外的 skill 目录），确认对外能力的 skill 名称与用途；没有对外 skill 的 Agent 一般不注册（无能力可调用的注册没有意义），除非用户明确要求先占位。
 4. 读取现有注册登记表 `C:/Users/Administrator/.agents/AGENTS.md`，检查该 Agent 是否已注册：
    - 已注册：不重复追加，改为**更新**原有条目（职责、能力、约束有变化时）。
