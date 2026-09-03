@@ -4,7 +4,7 @@
 
 ## 注册 Agent
 
-<!-- 后续有新 Agent 要注册时，按 skills/ai-agent-community skill 规范化执行；注册只允许在工作目录为本目录（C:/Users/Administrator/.agents）的会话中进行，其他 Agent 的会话不得直接修改本注册登记表 -->
+<!-- 后续有新 Agent 要注册时，按 skills/ai-agent-community skill 规范化执行；写入会话范围等约定以该 skill 为准 -->
 
 ## 使用约定
 
